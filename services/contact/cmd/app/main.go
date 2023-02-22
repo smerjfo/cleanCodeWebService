@@ -1,9 +1,20 @@
 package main
 
 import (
-	"fmt"
+	"context"
+	"github.com/jackc/pgx/v5"
+	"webServiceGolang/pkg/store/postgres"
 )
 
 func main() {
-	fmt.Println("Aboba")
+	conn, err := postgres.New(postgres.Settings{})
+	if err != nil {
+		panic(err)
+	}
+	defer func(Pool *pgx.Conn, ctx context.Context) {
+		err := Pool.Close(ctx)
+		if err != nil {
+
+		}
+	}(conn.Pool, context.Background())
 }
